@@ -23,7 +23,7 @@ export default class LoadingScene extends Phaser.Scene {
    */
   preload() {
     // Lade das Spritesheet für den Spieler
-    this.load.spritesheet("player", "/assets/player.png", {
+    this.load.spritesheet("player", "./assets/player.png", {
       frameWidth: 32,
       frameHeight: 32,
     })
@@ -83,5 +83,41 @@ export default class LoadingScene extends Phaser.Scene {
       // es im Konstruktor angegeben wurde.
       this.scene.start("level-01")
     }
+  }
+  createanimations() {
+    // Das erstellt uns eine Animation. Hier können wir mehrere Parameter übergeben
+    // um die Animation zu definieren.
+    this.anims.create({
+      key: "player_idle", // Das ist der Name der Animation, den brauchen wir um die Animation abzuspielen
+      frames: this.anims.generateFrameNumbers("player", {
+        // Das übernimmt das eigentlich erstellen der Animationsframes. Hier geben wir an von welchem Spritesheet die Animation erstellt wird. Das Spritesheet muss natürlich auch in der `preload`-Methode geladen werden.
+        start: 1, // Bei welcher Kachel die Animation beginnt.
+        end: 1, // Bei welcher Kachel die Animation fertig ist.
+      }),
+      frameRate: 10, // Mit welcher Geschwindigkeit die Animation abläuft. Spielt hier keine Rolle, denn wir haben nur 1 Frame
+      repeat: -1, // Wie oft die Animation wiederholt wird. Mit -1 läuft sie in einer Dauerschleife.
+    })
+
+    // Hier wird die Animation für das Rechtslaufen erstellt.
+    this.anims.create({
+      key: "player_right",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 6,
+        end: 8,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    // TODO: Erstellen Sie die restlichen Animationen
+    this.anims.create({
+      key: "player_left",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 3,
+        end: 5,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    })
   }
 }
